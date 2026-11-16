@@ -1,26 +1,28 @@
-# Momentum trading example
+# Swaps
 
-Build a USDC trade, sign locally, submit through Rungst and wait for Solana confirmation. This example does not yet implement a momentum strategy.
+Build a USDC trade, sign it locally, and submit it through Rungst.
 
-Copy `.env.example` to `.env` in this directory and fill in `RUNGST_API_KEY` and `RUNGST_WALLET_FILE` (local Solana CLI JSON keypair). Confirmation uses `https://api.mainnet.solana.com` by default; optionally set `RUNGST_SOLANA_RPC_URL` to use another RPC. You can also set these as environment variables; existing environment variables take precedence. Trading requests use `https://api.rungst.com`.
+## Setup
+
+Install Rust, then copy `.env.example` to `.env` in this directory. Fill in your API key and the path to a local Solana CLI JSON keypair. The wallet needs SOL for fees. Existing environment variables take precedence over `.env`.
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `RUNGST_API_KEY` | Required | Rungst API key |
+| `RUNGST_WALLET_FILE` | Required | Path to the local keypair JSON file |
+| `RUNGST_SOLANA_RPC_URL` | `https://api.mainnet.solana.com` | RPC used for balance and confirmation checks |
+
+## Run
+
+From this directory:
 
 ```sh
 cargo run -- buy TOKEN_MINT 10
+cargo run -- buy TOKEN_MINT 10 --submit
 cargo run -- sell TOKEN_MINT --submit
 cargo run -- sell TOKEN_MINT 10 --submit
 ```
 
-For example:
+The first command only builds a transaction. `--submit` signs and broadcasts a real trade. Omitting the sell amount uses the full associated-token-account balance, which may change before execution.
 
-```sh
-cargo run -- buy HkRQ6Qcadi5yuoNpZdA1Q7yVF3r7LdEmAw1aKkSxpump 0.005 --submit
-cargo run -- sell HkRQ6Qcadi5yuoNpZdA1Q7yVF3r7LdEmAw1aKkSxpump --submit
-```
-
-Omit the sell amount to fetch and sell the full current balance from the wallet’s associated token account. Provide an amount to sell part of the balance. The balance may change before the transaction executes.
-
-The first command builds only.
-`--submit` signs and broadcasts a real trade.
- The wallet must have SOL for fees.
- A timeout is an unknown outcome.
- check the signature before creating another trade.
+If submission or confirmation times out, check the transaction signature on chain before trying again.

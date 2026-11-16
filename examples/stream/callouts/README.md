@@ -17,3 +17,7 @@ Subscribe to live Solana callouts and print their creation time (UTC), source te
 The WebSocket is authorized by your registered IP; it does not require an API key or an environment file. Each open connection consumes credits, even while idle. The example reconnects and resubscribes after a disconnect; missed callouts are not replayed. Subscription errors are printed and stop the program so they can be corrected.
 
 See the [Rungst callouts documentation](https://docs.rungst.com/streams/callouts) for message fields and subscription details.
+
+## Environment variables
+
+None. The stream uses registered IP authorization.

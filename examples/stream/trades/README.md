@@ -12,3 +12,7 @@ cargo run -p trades -- --mint TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA
 These example addresses illustrate the format and may have no activity. Free Trial subscriptions require a filter; paid plans can omit it with `cargo run -p trades`. Press Ctrl+C to stop.
 
 The connection uses registered IP authorization, consumes credits even when idle, and resubscribes after disconnects. Missed trades are not replayed. See the [trade stream documentation](https://docs.rungst.com/streams/trades) for details.
+
+## Environment variables
+
+None. The stream uses registered IP authorization.
