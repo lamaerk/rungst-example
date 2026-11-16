@@ -28,3 +28,19 @@ rustc-ice-*.txt
 .env.*
 !.env.example
 .DS_Store
+
+# Editor recovery files and local key material
+.viminfo
+.vim/
+*.swp
+*.swo
+*.swn
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+
+# Generated trading state
+momentum-buy-history.json
